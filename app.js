@@ -35,11 +35,13 @@ const updateExchangeRate= async () => {
         amount.value="1";
     }
     //api doesnt accept uppercase so convert it to lower case.
-    console.log(fromCurr.value.toLowerCase(),toCurr.value.toLowerCase());
-    const URL=`${base_url}/${fromCurr.value.toLowerCase()}.json`;
+    const from=fromCurr.value.toLowerCase();
+    const to=toCurr.value.toLowerCase();
+    console.log(from,to);
+    const URL=`${base_url}/${from}.json`;
     let response=await fetch(URL);
     let data=await response.json();
-    let rate=data[toCurr.value.toLowerCase()];
+    const rate=data[from][to];
     console.log(rate);
 
     let finalAmount=amtVal*rate;
@@ -62,3 +64,4 @@ const updateExchangeRate= async () => {
 window.addEventListener("load",() => {
     updateExchangeRate();
 });
+
